@@ -26,11 +26,12 @@ class VenuesController < ApplicationController
   end
   
   def update
-    the_id = params.fetch("venue_id")
+    the_id = params.fetch("the_id")
 
-    @venue = Venue.where({ :id => the_id })
+    matching_venue = Venue.where({ :id => the_id })
+    venue = matching_venue.at(0)
     venue.address = params.fetch("query_address")
-    venue.name = params.fetch("Query_name")
+    venue.name = params.fetch("query_name")
     venue.neighborhood = params.fetch("query_neighborhood")
     venue.save
     
