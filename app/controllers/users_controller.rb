@@ -21,7 +21,9 @@ class UsersController < ApplicationController
   
   def create
     user = User.new
-    user.username = params.fetch("query_username")
+    new_user_name = params.fetch("query_username")
+    #user.username = params.fetch("query_username")
+    user.username = new_user_name
     user.save
     
     redirect_to("/users/#{user.username}")
@@ -34,7 +36,8 @@ class UsersController < ApplicationController
     
     the_user.username = params.fetch("query_username")
     the_user.save
-    redirect_to("/users/#{user.username}")
+    username = the_user.username
+    redirect_to("/users/#{username}", allow_other_host: true)
   end
 
 end
